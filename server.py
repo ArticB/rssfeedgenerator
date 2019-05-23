@@ -1,15 +1,12 @@
 import os
-from flask import Flask, request, send_from_directory
+import rssgenerator as rss
+from flask import Flask, request, render_template, redirect, url_for, send_from_directory
 from datetime import datetime
 from flask_jsonpify import jsonify
 from flask_restful import Resource, Api
-import xml.etree.ElementTree as ET 
-
-RSS_FOLDER = './rss'
 
 app = Flask(__name__)
-
-app.config['RSS_FOLDER'] = RSS_FOLDER
+app.config['RSS_FOLDER'] = rss.RSS_FOLDER
 api = Api(app)
 
 def parsehtml(content):
@@ -18,16 +15,22 @@ def parsehtml(content):
 
 @app.route("/rssinput", methods=['POST'])
 def rssinput():
-    link = request.form['text']
-    tree = ET.parse(RSS_FOLDER+'/rss.xml')
-    root = tree.getroot()
+    link = request.form['link']
+    title = request.form['title']
+    description = title
+    rss.append(link, title, description)
+    return redirect(url_for('rssfeed'))
 
+@app.route("/rssfeed")
+def rssfeed():
     return send_from_directory(app.config['RSS_FOLDER'],'rss.xml')
-
 
 @app.route("/input")
 def input():
-    return '<form action="/rssinput" method="post" ><input type="text" name="text"/><input type="submit">Submit</input></form>'
+    link = '<label>Link</label><input type="text" name="link" required/><br>'
+    description = '<label>Description(optional)</label><input type="text" name="description"/><br>'
+    title = '<label>Title(optional)</label><input type="text" name="title" required/><br>'
+    return parsehtml('<form action="/rssinput" method="post" >'+title+link+'<input type="submit">Submit</input></form>') 
 
 @app.route("/")
 def hello():
