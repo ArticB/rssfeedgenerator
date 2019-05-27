@@ -1,0 +1,25 @@
+{% block nav %}
+<nav>
+    <div class="nav right justify-content-end" id="navtab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+            aria-selected="true">Home</a>
+        <a class="nav-item nav-link" id="nav-create-tab" data-toggle="tab" href="#create" role="tab" aria-controls="create"
+            aria-selected="false">Create</a>
+        <a class="nav-item nav-link" id="nav-read-tab" data-toggle="tab" href="#read" role="tab" aria-controls="read"
+            aria-selected="false">Read</a>
+        <a class="nav-item nav-link" id="nav-update-tab" data-toggle="tab" href="#update" role="tab" aria-controls="update"
+            aria-selected="false">Update</a>
+        <a class="nav-item nav-link" id="nav-delete-tab" data-toggle="tab" href="#delete" role="tab" aria-controls="delete"
+            aria-selected="false">Delete</a>
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <h1>Welcome</h1>
+    </div>
+    <div class="tab-pane fade" id="create" role="tabpanel" aria-labelledby="nav-create-tab">{%include "create.html" %}</div>
+    <div class="tab-pane fade" id="read" role="tabpanel" aria-labelledby="nav-read-tab">...</div>
+    <div class="tab-pane fade" id="update" role="tabpanel" aria-labelledby="nav-update-tab">...</div>
+    <div class="tab-pane fade" id="delete" role="tabpanel" aria-labelledby="nav-delete-tab">...</div>
+</div>
+{% endblock %}

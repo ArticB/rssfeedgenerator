@@ -34,7 +34,7 @@ def input():
 
 @app.route("/")
 def hello():
-    return jsonify({'text':'Welcome'})
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(host= 'localhost', port=5005)
