@@ -1,0 +1,27 @@
+{% block tbody %}
+
+{% for d in alldata %}
+<tr>
+    <th>{{d.title}}</th>
+    {% if option == 'add'%}
+    <th>
+        <a href="#exampleModal" data-toggle="modal" data-target="#exampleModal" onclick="setid('{{d._id}}')">
+            <i class="fas fa-plus-circle"></i>
+        </a>
+    </th>
+    {%endif%}
+    {% if option == 'view' %}
+    <th>
+        <a href="#exampleModal2" data-toggle="modal" data-target="#exampleModal2" onclick="setiditem('{{d._id}}')">
+            <i class="fas fa-eye"></i>
+        </a>
+    </th>
+    {% endif %}
+    {% if option == 'items' %}
+    <th>{{d.link}}</th>
+    {% endif %}
+</tr>
+{% endfor %}
+
+{% endblock %}
+
